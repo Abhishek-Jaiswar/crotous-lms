@@ -1,4 +1,4 @@
-// lib/prisma.ts
+/* eslint-disable */
 
 import { PrismaClient } from "./generated/prisma";
 
