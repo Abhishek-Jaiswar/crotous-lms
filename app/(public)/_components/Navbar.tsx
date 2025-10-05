@@ -1,10 +1,12 @@
 'use client'
 
-import { ThemeToggle } from '@/components/ThemeToggle'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { buttonVariants } from '@/components/ui/button'
 import { authClient } from '@/lib/auth-client'
 import Link from 'next/link'
 import React from 'react'
+import UserDropdown from './UserDropdown'
+import Logo from '@/components/sidebar/Logo'
 
 const navigationItems = [
     { id: 1, name: "Home", path: '/home' },
@@ -17,15 +19,10 @@ const Navbar = () => {
     return (
         <div className='sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-[backdrop-filter]:bg-background/60'>
             <div className=' container flex min-h-16 items-center mx-auto px-4 md:px-6 lg:px-8'>
-                <Link
-                    href={'/'}
-                    className='text-lg font-bold mr-8 '
-                >
-                    CROTOUS
-                </Link>
+                <Logo />
 
                 {/* Desktop navigation */}
-                <nav className=' hidden md:flex  md:flex-1 md:items-center md:justify-between'>
+                <nav className=' hidden md:flex  md:flex-1 md:items-center md:justify-between ml-10'>
                     <div className='flex items-center space-x-2'>
                         {navigationItems.map((items) => (
                             <Link
@@ -41,7 +38,13 @@ const Navbar = () => {
                         <ThemeToggle />
 
                         {isPending ? null : session ? (
-                            <p>logged in</p>
+                            <>
+                                <UserDropdown
+                                    email={session.user.email}
+                                    name={session.user.name}
+                                    image={session.user.image || ""}
+                                />
+                            </>
                         ) : (
                             <>
                                 <Link

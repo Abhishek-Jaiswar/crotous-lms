@@ -1,12 +1,7 @@
-'use client'
-
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { BookOpen, Brain, Headphones, LucideIcon, Sparkles } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { authClient } from "@/lib/auth-client";
 import { buttonVariants } from "@/components/ui/button";
 
 interface featureProps {
@@ -44,24 +39,9 @@ const features: featureProps[] = [
 ];
 
 export default function Home() {
-    const { data: session } = authClient.useSession()
-    const router = useRouter()
-
-    async function signOutHandler() {
-        await authClient.signOut({
-            fetchOptions: {
-                onSuccess: () => {
-                    router.push("/")
-                    toast.success("Logged out successfully.")
-                }
-            }
-        })
-    }
-
     return (
         <>
             <section className=" py-20 relative">
-
                 <div className="flex flex-col items-center space-y-8">
                     <Badge
                         variant='outline'
@@ -94,7 +74,7 @@ export default function Home() {
 
             </section>
 
-            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
                 {features.map(({ id, title, description, icon: Icon }) => (
                     <Card key={id} className=" hover:shadow-md transition-shadow duration-200">
                         <CardHeader>
