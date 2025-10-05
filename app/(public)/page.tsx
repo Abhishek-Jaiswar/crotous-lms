@@ -1,14 +1,13 @@
 'use client'
 
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { BookOpen, Brain, Headphones, LucideIcon, LucideProps, Sparkles } from "lucide-react";
+import { BookOpen, Brain, Headphones, LucideIcon, Sparkles } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { authClient } from "@/lib/auth-client";
+import { buttonVariants } from "@/components/ui/button";
 
 interface featureProps {
     id: number,

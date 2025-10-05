@@ -1,4 +1,3 @@
-import { ThemeToggle } from '@/components/ThemeToggle'
 import React, { ReactNode } from 'react'
 import Navbar from './_components/Navbar'
 
