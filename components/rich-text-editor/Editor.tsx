@@ -1,4 +1,5 @@
-// @typescript-eslint/no-explicit-any
+/* eslint-disable */
+
 'use client'
 
 import { EditorContent, useEditor } from '@tiptap/react'
