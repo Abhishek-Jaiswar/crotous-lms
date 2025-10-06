@@ -9,7 +9,7 @@ const page = () => {
         <h1 className='text-xl font-bold'>Your Courses</h1>
         <Link
           className={buttonVariants()}
-          href={'/admin/courses'}>
+          href={'/admin/courses/create'}>
           Create Course
         </Link>
       </div>
