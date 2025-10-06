@@ -10,16 +10,23 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  // Base ESLint + Next.js configs
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+
+  // Your project overrides
   {
     ignores: [
       "node_modules/**",
       ".next/**",
       "out/**",
       "build/**",
-      "next-env.d.ts",,
-      "lib/generated/**"
+      "next-env.d.ts",
+      "lib/generated/**",
     ],
+
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    },
   },
 ];
 
