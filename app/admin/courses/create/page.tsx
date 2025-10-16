@@ -170,7 +170,6 @@ const CourseCreatingPage = () => {
                   <FormItem className="w-full">
                     <FormLabel>Thumbnail Image</FormLabel>
                     <FormControl>
-                      {/* <Input placeholder="Thumbnail Url" {...field} /> */}
                       <Uploader />
                     </FormControl>
                     <FormMessage />

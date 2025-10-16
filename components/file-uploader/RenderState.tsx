@@ -1,7 +1,8 @@
 import { cn } from '@/lib/utils'
-import { CloudUploadIcon, ImageIcon } from 'lucide-react'
+import { CloudUploadIcon, ImageIcon, Loader, XIcon } from 'lucide-react'
 import React from 'react'
 import { Button } from '../ui/button'
+import Image from 'next/image'
 
 
 export const RenderEmptyState = ({ isDragActive }: { isDragActive: boolean }) => {
@@ -32,6 +33,51 @@ export const RenderErrorState = () => {
             <Button type='button' className='mt-4'>
                 Retry File Selection
             </Button>
+        </div>
+    )
+}
+
+export const RenderUploadedState = ({
+    previewUrl, isDeleting, handleRemoveFile
+}: { previewUrl: string, isDeleting: boolean, handleRemoveFile: () => void }) => {
+    return (
+        <div className='text-center'>
+            <Image
+                src={previewUrl}
+                alt='uploaded file'
+                fill
+                className='object-contain p-2'
+            />
+
+            <Button
+                onClick={handleRemoveFile}
+                disabled={isDeleting}
+                type='button'
+                variant='destructive'
+                size='icon'
+                className={cn(
+                    'absolute top-4 right-4'
+                )}
+            >
+                {isDeleting ? (
+                    <>
+                        <Loader className='size-4 animate-spin' />
+                        Deleting...
+                    </>
+                ) : (
+                    <XIcon className='size-4' />
+                )}
+            </Button>
+        </div>
+    )
+}
+
+export const RenderUploadingState = ({ progress, file }: { progress: number, file: File }) => {
+    return (
+        <div className='text-center flex items-center justify-center flex-col'>
+            <p>{progress}</p>
+            <p className='mt-2 text-sm font-medium text-foreground'>Uploading...</p>
+            <p className='mt-1 text-xs text-muted-foreground truncate max-w-xs'>{file.name}</p>
         </div>
     )
 }
