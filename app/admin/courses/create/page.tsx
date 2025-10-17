@@ -15,9 +15,9 @@ import {
   courseSchema,
   CourseSchemaType,
 } from "@/lib/zodSchema";
-import { ArrowLeftIcon, SparkleIcon } from "lucide-react";
+import { ArrowLeftIcon, Loader, PlusIcon, SparkleIcon } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useTransition } from "react";
 import { useForm, type SubmitHandler, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -40,8 +40,14 @@ import {
 } from "@/components/ui/select";
 import RichTextEditor from "@/components/rich-text-editor/Editor";
 import Uploader from "@/components/file-uploader/Uploader";
+import { tryCatch } from "@/hooks/try-catch";
+import { createCourse } from "./actions";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const CourseCreatingPage = () => {
+  const [isPending, startTransition] = useTransition()
+  const router = useRouter()
   const form = useForm<CourseSchemaType>({
     resolver: zodResolver(courseSchema) as Resolver<CourseSchemaType>,
     defaultValues: {
@@ -58,8 +64,23 @@ const CourseCreatingPage = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<CourseSchemaType> = (values) => {
-    console.log(values);
+  const onSubmit = (values: CourseSchemaType) => {
+    startTransition(async () => {
+      const { data: result, error } = await tryCatch(createCourse(values))
+
+      if (error) {
+        toast.error("An expected error occured.");
+        return
+      }
+
+      if (result.status === 'success') {
+        toast.success(result.message)
+        form.reset()
+        router.push('/admin/courses')
+      } else if (result.status === 'error') {
+        toast.error(result.message)
+      }
+    })
   };
   return (
     <>
@@ -170,8 +191,7 @@ const CourseCreatingPage = () => {
                   <FormItem className="w-full">
                     <FormLabel>Thumbnail Image</FormLabel>
                     <FormControl>
-                      {/* <Input placeholder="Thumbnail Url" {...field} /> */}
-                      <Uploader />
+                      <Uploader value={field.value} onChange={field.onChange} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -297,7 +317,22 @@ const CourseCreatingPage = () => {
 
               {/* Submit */}
               <div className="flex justify-end">
-                <Button type="submit">Create Course</Button>
+                <Button
+                  type="submit"
+                  disabled={isPending}
+                >
+                  {isPending ? (
+                    <>
+                      <Loader className="size-3 animate-spin ml-1" />
+                      Uploading...
+                    </>
+                  ) : (
+                    <>
+                      Create Course
+                      <PlusIcon className="ml-1" size={16} />
+                    </>
+                  )}
+                </Button>
               </div>
             </form>
           </Form>
