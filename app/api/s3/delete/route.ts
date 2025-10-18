@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/app/data/admin/require-admin";
 import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
 import { auth } from "@/lib/auth";
 import { env } from "@/lib/env";
@@ -22,18 +23,20 @@ export const aj = arcjet
   );
 
 export async function DELETE(request: Request) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const session = await requireAdmin();
+
   try {
     const decision = await aj.protect(request, {
       fingerprint: session?.user.id as string,
     });
 
     if (decision.isDenied()) {
-      return NextResponse.json({
-        error: "Hello, dude what your are trying to do! are you serious.",
-      }, {status: 429});
+      return NextResponse.json(
+        {
+          error: "Hello, dude what your are trying to do! are you serious.",
+        },
+        { status: 429 }
+      );
     }
 
     const body = await request.json();
