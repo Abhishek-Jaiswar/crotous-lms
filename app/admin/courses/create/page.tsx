@@ -141,8 +141,7 @@ const CourseCreatingPage = () => {
                   className="w-fit"
                   onClick={() => {
                     const titleValue = form.getValues("title");
-                    const slug = slugify(titleValue);
-
+                    const slug = slugify(titleValue).toLocaleLowerCase();
                     form.setValue("slug", slug, { shouldValidate: true });
                   }}
                 >
