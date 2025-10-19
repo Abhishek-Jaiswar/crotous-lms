@@ -1,6 +1,6 @@
 import { AdminCourseType } from '@/app/data/admin/admin-get-courses'
 import { Button, buttonVariants } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { useConstructUrl } from '@/hooks/use-construct-url';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { ArrowRight, EyeIcon, MoreVertical, PencilIcon, School, TimerIcon, Trash2Icon } from 'lucide-react';

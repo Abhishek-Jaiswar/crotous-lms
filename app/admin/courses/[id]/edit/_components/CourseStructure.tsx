@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { cn } from "@/lib/utils"
-import { DndContext, DragEndEvent, DraggableSyntheticListeners, KeyboardSensor, PointerSensor, rectIntersection, useSensor, useSensors } from "@dnd-kit/core"
+import { DndContext, DraggableSyntheticListeners, KeyboardSensor, PointerSensor, rectIntersection, useSensor, useSensors } from "@dnd-kit/core"
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
-import { ChevronDown, ChevronRight, FileIcon, GripVertical, GripVerticalIcon, Trash2, Trash2Icon } from "lucide-react"
+import { ChevronDown, ChevronRight, FileIcon, GripVertical, GripVerticalIcon, Trash2 } from "lucide-react"
 import Link from "next/link"
 import { ReactNode, useState } from "react"
 
@@ -65,7 +65,7 @@ export const CourseStructure = ({ data }: iAppProp) => {
         );
     }
 
-    function handleDragEnd(event) {
+    function handleDragEnd(event: { active: any; over: any }) {
         const { active, over } = event;
 
         if (active.id !== over.id) {

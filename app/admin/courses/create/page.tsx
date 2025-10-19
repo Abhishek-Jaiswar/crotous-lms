@@ -18,7 +18,7 @@ import {
 import { ArrowLeftIcon, Loader, PlusIcon, SparkleIcon } from "lucide-react";
 import Link from "next/link";
 import React, { useTransition } from "react";
-import { useForm, type SubmitHandler, type Resolver } from "react-hook-form";
+import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,

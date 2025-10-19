@@ -114,7 +114,7 @@ const Uploader = ({ value, onChange }: iAppProps) => {
         xhr.send(file)
       })
 
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong...")
       setFileState((prev) => ({
         ...prev,
@@ -170,7 +170,7 @@ const Uploader = ({ value, onChange }: iAppProps) => {
       }))
 
       toast.success("File removed successfully")
-    } catch (error) {
+    } catch {
       toast.error("Error removing file. Please try again later.")
       setFileState((prev) => ({
         ...prev,
