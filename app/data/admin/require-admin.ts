@@ -10,7 +10,7 @@ export const requireAdmin = async () => {
   });
 
   if (!session) {
-    return redirect("/login");
+    return redirect("/sign-in");
   }
 
   if (session.user.role !== "admin") {
