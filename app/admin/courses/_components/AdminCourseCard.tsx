@@ -1,3 +1,4 @@
+
 import { AdminCourseType } from '@/app/data/admin/admin-get-courses'
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card'

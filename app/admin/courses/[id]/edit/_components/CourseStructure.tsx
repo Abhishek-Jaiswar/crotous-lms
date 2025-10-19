@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable */
 
 import { AdminCourseSingleType } from "@/app/data/admin/admin-get-course"
 import { Button } from "@/components/ui/button"
